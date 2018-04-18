@@ -1,0 +1,7 @@
+{
+  "name": "Wego",
+  "short_name": "Wego",
+  "description": "Lists hotel information",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,70 @@
+:host {
+  font-family: 'Roboto', sans-serif;
+}
+
+iron-image {
+   background-color: white;
+ }
+
+ .name {
+   font-size: 18px;
+ }
+
+.hotel-item {
+  border-bottom: 1px solid lightgrey;
+  overflow: hidden;
+  max-height: 150px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+iron-image {
+  float: left;
+  margin-right: 10px;
+}
+
+.hotel-details {
+  margin-top: 18px;
+}
+
+.district, .distToCenter, .reviews {
+  color: grey;
+  padding-top: 5px;
+}
+
+.num-reviews {
+  position: relative;
+  bottom: 8px;
+  left: 5px;
+}
+
+.districtName {
+  display: inline-block;
+  letter-spacing: 1px;
+  margin-left: 6px;
+  font-size: 15px;
+}
+
+.distToCenter, .num-reviews {
+  font-size: 14px;
+}
+
+.price {
+  position: relative;
+  color: #7CB342;
+  font-size: 20px;
+  float: right;
+}
+
+.dollar {
+  position: absolute;
+  bottom: 30px;
+  right: 39px;
+}
+
+.amount {
+  font-weight: bold;
+  position: absolute;
+  bottom: 24px;
+  right: 4px;
+}

@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="rating-icon">
+    <template>
+        <style>
+        :host {
+            display: inline-block;
+        }
+        </style>
+
+        <template is="dom-repeat" items="[[_displayStars(value)]]">
+            <span><img width="15" height="15" src="assets/hstar.png"></img></span>
+        </template>
+    </template>
+
+    <script>
+        class RatingIcon extends Polymer.Element {
+            static get is() { return 'rating-icon'; }
+            static get properties() {
+                return {
+                  value: {
+                    type: Number
+                  },
+                  icon: {
+                      type: String,
+                      value: function () {
+                        return this.resolveUrl('assets/hstar.png')
+                      }
+                  }
+                };
+            }
+
+            _displayStars(value) {
+              let ratingArray = [];
+              for (let i = 0; i < value; i++) {
+                ratingArray.push(i+1);
+              }
+              return ratingArray;
+            }
+
+
+        }
+        window.customElements.define(RatingIcon.is, RatingIcon);
+    </script>
+</dom-module>

@@ -1,0 +1,88 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="rating-icon.html">
+<link rel="import" href="score-badge.html">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<dom-module id="wego-app">
+  <link rel="import" type="css" href="../styles/styles.css">
+  <template>
+    <iron-ajax auto url="data/hotels.json"  handle-as="json" last-response="{{hotels}}" on-request="handleRequest" on-response="handleResponse" on-error="handleError"></iron-ajax>
+    <template is="dom-repeat" items="{{hotels}}">
+      <!-- Individual Hotel Item -->
+      <div class="hotel-item">
+        <!-- Indiv Hotel Image -->
+        <div class="thumbnail">
+          <iron-image src={{item.image}}></iron-image>
+        </div>
+        <!-- Hotel Details -->
+        <div class="hotel-details">
+          <div class="name">
+          [[item.name]]
+          </div>
+          <div class="district">
+             <rating-icon value=[[item.stars]]></rating-icon>
+             <!-- Check if the hotel object contains a field for district, if so, proceed to capitalize -->
+             <template is="dom-if" if="[[_districtCheck(item.district)]]">
+                <div class="districtName">{{_capitalize(item.district)}}</div>
+             </template>
+          </div>
+          <div class="distToCenter">
+            {{_formatDist(item.distanceToCityCentre)}} km to city center
+          </div>
+          <div class="reviews">
+            <score-badge score=[[item.review.score]]></score-badge>
+            <span class="num-reviews">{{item.review.reviewsCount}} Reviews</span>
+          </div>
+          <div class="price">
+            <span class="dollar">S$</span>
+            <span class="amount">[[item.amount]]</span>
+          </div>
+        </div>
+      </div>
+
+  </template>
+</template>
+
+
+  <script>
+    class WegoApp extends Polymer.Element {
+      static get is() { return 'wego-app'; }
+      static get properties () {
+        return {
+          distanceToCityCentre: {
+            type: Number
+          },
+          district: {
+            type: String
+          },
+          review: {
+            score: {
+              type: Number
+            },
+          review: {
+            reviewsCount: {
+              type: Number
+            }
+          }
+          }
+        };
+      }
+
+      _formatDist (distanceToCityCentre) {
+        return distanceToCityCentre.toFixed(2);
+      }
+
+      _districtCheck(district) {
+        return district !== null;
+      }
+
+      _capitalize (district) {
+        district = district.toUpperCase();
+        return district;
+      }
+    }
+    customElements.define(WegoApp.is, WegoApp);
+  </script>
+</dom-module>

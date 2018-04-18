@@ -1,0 +1,88 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+
+<dom-module id="score-badge">
+    <template>
+        <style>
+        :host {
+          display: inline-block;
+          position: relative;
+        }
+        .score-number {
+          color: white;
+          position: absolute;
+          top: 40%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .score-rating {
+          bottom: 29px;
+          left: 48px;
+          position: absolute;
+          width: 80px;
+        }
+        </style>
+        <!-- Use dom-if to stamp template according to the score of the hotel -->
+        <template is="dom-if" if="[[_isPoor(score)]]">
+            <img width="40" height="42" src="assets/poor.png"></img>
+            <div class="score-number">{{score}}</div>
+            <div class="score-rating">Poor</div>
+        </template>
+        <template is="dom-if" if="[[_isFair(score)]]">
+            <img width="40" height="42" src="assets/fair.png"></img>
+            <div class="score-number">{{score}}</div>
+            <div class="score-rating">Fair</div>
+        </template>
+        <template is="dom-if" if="[[_isGood(score)]]">
+            <img width="40" height="42" src="assets/good.png"></img>
+            <div class="score-number">{{score}}</div>
+            <!-- More fine grained score ratings, hence the nested dom-if templates -->
+              <template is="dom-if" if="[[_showAsGood(score)]]">
+                <div class="score-rating">Good</div>
+              </template>
+              <template is="dom-if" if="[[_showAsVeryGood(score)]]">
+                <div class="score-rating">Very Good</div>
+              </template>
+              <template is="dom-if" if="[[_showAsExcellent(score)]]">
+                <div class="score-rating">Excellent</div>
+              </template>
+        </template>
+    </template>
+
+    <script>
+        class ScoreBadge extends Polymer.Element {
+            static get is() { return 'score-badge'; }
+            static get properties() {
+                return {
+                  score: {
+                    type: Number
+                  },
+                };
+            }
+
+            // For determining the colors of the score badges
+            _isPoor(score) {
+              return ((score >= 0) && (score <= 67));
+            }
+            _isFair(score) {
+              return ((score >= 68) && (score <= 74));
+            }
+            _isGood(score) {
+              return ((score >= 75) && (score <= 100));
+            }
+
+            // For determing to rate as 'Good', 'Very Good', or 'Excellent'
+            _showAsGood(score) {
+              return ((score >= 75) && (score <= 79));
+            }
+            _showAsVeryGood(score) {
+              return ((score >= 80) && (score <= 85));
+            }
+            _showAsExcellent(score) {
+              return ((score >= 86) && (score <= 100));
+            }
+          }
+
+          window.customElements.define(ScoreBadge.is, ScoreBadge);
+    </script>
+</dom-module>
