@@ -26,3 +26,7 @@ Assets for the star rating and for the different colored score badges (for the r
 ### Libraries used
 1. [iron-ajax](https://www.webcomponents.org/element/PolymerElements/iron-ajax) is used for making requests.
 2. [iron-image](https://www.webcomponents.org/element/PolymerElements/iron-image)
+
+
+### Notes
+Page may take some time to load, about ~5 seconds. 
